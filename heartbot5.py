@@ -35,4 +35,4 @@ while i==1:
         print max(faces[0]["faceAttributes"]["emotion"],key=faces[0]["faceAttributes"]["emotion"].get)
         time.sleep(1)
     except Exception as e:
-        time.sleep(0.5)
+        pass
