@@ -11,7 +11,7 @@
     <script src="js/vendor/modernizr.js"></script>
     <script type="text/javascript"> 
 
-        function Ajax()
+        function Ajax_text()
         {
             var
                 $http,
@@ -35,7 +35,7 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', 'loadtxt.php' + '?' + new Date().getTime(), true);
+                $http.open('GET', 'loadtxt.txt' + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
@@ -102,7 +102,7 @@
 
     <div class="row">
         <div class="large-6 columns">
-            <a href="#" class="button expand">Emotion Analyser</a>
+            <a href="http://localhost:8001/emotion" class="button expand">Emotion Analyser</a>
         </div>
         <div class="large-6 columns">
             <div>
@@ -123,7 +123,7 @@
     </div>
 
     <script type="text/javascript">
-        setTimeout(function() {Ajax();}, 1000);
+        setTimeout(function() {Ajax_text();}, 1000);
     </script>
     <div id="ReloadThis">Default text</div>
 
