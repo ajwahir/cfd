@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Stack Poppers || IIT Madras</title>
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\css\foundation.css" />
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\css\custom.css" />
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\foundation-icons\foundation-icons.css" />
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\vendor\modernizr.js"></script>
-<!--     <script type="text/javascript"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'foundation-icons/foundation-icons.css') }}" />
+    <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+    <script type="text/javascript"> 
 
         function Ajax_text()
         {
@@ -35,13 +35,13 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', 'loadtxt.txt' + '?' + new Date().getTime(), true);
+                $http.open('GET', "{{ url_for('static', filename = 'loadtxt.txt') }}" + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
         }
 
-    </script> -->
+    </script>
 
 </head>
 
@@ -119,11 +119,11 @@
         </div>
     </div>
 
-<!--     <script type="text/javascript">
+    <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
     <div id="ReloadThis">Default text</div>
- -->
+
    
 
 
@@ -191,8 +191,8 @@
         </div>
     </footer> -->
  
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\vendor\jquery.js"></script>
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\foundation.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/vendor/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
     <script>
         $(document).foundation();
     </script>
