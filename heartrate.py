@@ -2,10 +2,8 @@ from flask import Flask
 app = Flask(__name__)
 import cv2
 
-
-
-@app.route("/")
-def hello():
+@app.route('/heartrate')
+def hello_world():
     cv2.namedWindow("preview")
     vc = cv2.VideoCapture(0)
 
@@ -24,4 +22,9 @@ def hello():
         if i%50==0:
             cv2.imwrite("image.jpg", frame)
     cv2.destroyWindow("preview")
-    return "Hello World!"s
+    return 'Hello, World!'
+
+
+
+if __name__ == '__main__':
+  app.run()
