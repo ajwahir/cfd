@@ -141,6 +141,9 @@ while success:
 			xL.append(butter_bandpass_filter(yL[i],lowcut,highcut,fs,5))
 		xLT=np.transpose(xL)
 
+		if(count%50==0):
+			cv2.imwrite('image.jpg',image)
+
 		# print xLT
 		tr=0
 
@@ -162,7 +165,7 @@ while success:
 
 			print finp
 
-			f=open('stack_website/heartrate.txt','w')
+			f=open('static/heartrate.txt','w')
 			f.write('Your Pulse Rate is '+ str(round(finp,2)))
 			f.close()
 		

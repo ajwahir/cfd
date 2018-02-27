@@ -43,12 +43,12 @@ def emotion():
             with open("emotion.txt", "w") as text_file:
                 text_file.write("%s" % tout)
             if tout in ["happiness","sadness","anger","neutral","surprise","contempt","disgust","fear"]:
-                with open("prompts\\"+tout+".txt","r") as f:
+                with open("prompts/"+tout+".txt","r") as f:
                     lines = f.readlines()
-                with open("prompt.txt", "w") as text_file:
+                with open("static/prompt.txt", "w") as text_file:
                     text_file.write("%s" % random.choice(lines))
             if tout in ["happiness","sadness","anger","surprise"]:
-                copyfile("emojis\\"+tout+".gif", "mood.gif")
+                copyfile("emojis/"+tout+".gif", "static/mood.gif")
 
 
         except Exception as e:
