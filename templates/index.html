@@ -191,6 +191,12 @@
     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_emotion();}, 1000);
+    </script>
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_doc();}, 1000);
+    </script>
 <section>
     <div class="row">
        <div class="large-10 columns">
@@ -201,7 +207,7 @@
     </div>
    <div class="row">
         <div class="large-6 columns">
-           <img src="happy.gif" id="img">
+           <img src="{{ url_for('static', filename = 'mood.gif') }}" id="img">
 
             
 
