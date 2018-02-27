@@ -11,7 +11,7 @@ import os
 import cognitive_face as CF
 import requests
 import random
-
+from shutil import copyfile
 
 @app.route('/emotion')
 def emotion():
@@ -46,7 +46,10 @@ def emotion():
                 with open("prompts\\"+tout+".txt","r") as f:
                     lines = f.readlines()
                 with open("prompt.txt", "w") as text_file:
-                    text_file.write("%s" % random.choice(lines))               
+                    text_file.write("%s" % random.choice(lines))
+            if tout in ["happiness","sadness","anger","surprise"]:
+                copyfile("emojis\\"+tout+".gif", "mood.gif")
+
 
         except Exception as e:
             pass
