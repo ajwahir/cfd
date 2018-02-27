@@ -43,6 +43,74 @@
 
     </script>
 
+    <script type="text/javascript"> 
+
+        function Ajax_emotion()
+        {
+            var
+                $http,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('prompt').innerHTML = $http.responseText;
+                        setTimeout(function(){$self();}, 1000);
+                    }
+                };
+                $http.open('GET', "{{ url_for('static', filename = 'prompt.txt') }}" + '?' + new Date().getTime(), true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+
+    <script type="text/javascript"> 
+
+        function Ajax_doc()
+        {
+            var
+                $http,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('doc').innerHTML = $http.responseText;
+                        setTimeout(function(){$self();}, 1000);
+                    }
+                };
+                $http.open('GET', "{{ url_for('static', filename = 'doc.txt') }}" + '?' + new Date().getTime(), true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -95,7 +163,7 @@
         </div>
     </section>
 
-
+<section>
 
     <div class="row">
         <div class="large-6 columns">
@@ -118,11 +186,12 @@
             </div>
         </div>
     </div>
+    </section>
 
     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
-
+<section>
     <div class="row">
        <div class="large-10 columns">
            <h1>
@@ -158,8 +227,20 @@
             
         </div>
     </div>
+</section>
    
-
+<div class="row">
+        <h3>
+            <div id="prompt">
+            </div>
+        </h3>
+    </div>
+    <div class="row">
+        <h3>
+            <div id="doc">
+            </div>
+        </h3>
+    </div>
 
 
     <!-- <footer>
