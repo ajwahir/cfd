@@ -1,0 +1,5 @@
+contempt 1
+contempt 2
+contempt 4
+contempt 3
+contempt 5
