@@ -1,15 +1,9 @@
-from flask import Flask, render_template, Response
-app = Flask(__name__)
-import cv2
-import time
+from flask import Flask, request
+app = Flask(__name__, static_url_path='')
 
-def p(i):
-    return "Hello World "+str(i)
+@app.route('/home/ajwahir/imagine_cup/cfd/static/')
+def root():
+    return app.send_static_file('index.html')
 
-
-
-@app.route("/")
-def hello():
-    app.send_static_file('index.html')
-if __name__ == '__main__':  
-  app.run()        
+if __name__ == '__main__':
+  app.run(debug=True)
