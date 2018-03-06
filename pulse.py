@@ -7,6 +7,7 @@ from sklearn.decomposition import PCA
 from scipy.signal import butter, lfilter, freqz
 from scipy.signal import find_peaks_cwt
 from scipy.interpolate import interp1d
+from collections import deque
 
 def getavg(indexes,tr):
 	dif = []
@@ -43,13 +44,24 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
     return y
 
 def is_empty(any_structure):
-    if any_structure:
+    if len(any_structure)>0:
         return False
     else:
         return True
 
+def check_distract(gaze):
+	s=sum(gaze)
+	# print 'sum is ' + str(s)
+	if(s>per_for_dis*len(gaze)):
+		return True
+	else:
+		return False
+
+time_param = 100
+per_for_dis = 0.9;
+
 face_cascade = cv2.CascadeClassifier('/home/ajwahir/imagine_cup/cfd/haarcascades/haarcascade_frontalface_alt.xml')
-eye_cascade = cv2.CascadeClassifier('/home/ajwahir/imagine_cup/cfd/haarcascade/haarcascade_eye.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
 vidcap = cv2.VideoCapture(0)
 # vidcap = cv2.VideoCapture('/home/ajwahir/acads/pd3/face2.mp4')
@@ -64,7 +76,7 @@ highcut = 5.0
 fs=250.
 fc=30.
 
-
+gaze=[]
 count = 0
 success = True
 while success:
@@ -106,6 +118,30 @@ while success:
 		yL=get2dList(len(knp))
 		knp=np.asarray(knp,dtype=np.float32)
 	else:
+		#The eye tracking part
+		if(gray.size>1):
+			for (x1,y1,w1,h1) in faces:
+			        # cv2.rectangle(image,(x1,y1),(x1+w1,y1+h1),(255,0,0),2)
+			        roi_gray = gray[y1:y1+h1, x1:x1+w1]
+			        # roi_color = image[y1:y1+h1, x1:x1+w1]
+			        # cv2.imshow("roi gray",roi_gray)
+			        # cv2.waitKey(0)
+			        
+			        eyes = eye_cascade.detectMultiScale(roi_gray)
+
+			        if is_empty(eyes):
+			        	gaze.append(1)
+			        else:
+			        	gaze.append(0)
+
+		# print len(gaze)
+		if len(gaze)>time_param:
+			for j in range(0,(len(gaze)-time_param)):
+				gaze.pop(0)
+			if(check_distract(gaze)):
+				print "YOU ARE DISTRACTED! GET BACK TO WORK!"
+				gaze = []
+
 		p1, st, err = cv2.calcOpticalFlowPyrLK(prev, gray, knp, None, **lk_params)
 
 		kl=list(knp)
