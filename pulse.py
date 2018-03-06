@@ -9,6 +9,7 @@ from scipy.signal import find_peaks_cwt
 from scipy.interpolate import interp1d
 from collections import deque
 
+
 def getavg(indexes,tr):
 	dif = []
 	if len(indexes)>2:
@@ -63,6 +64,7 @@ per_for_dis = 0.9;
 face_cascade = cv2.CascadeClassifier('/home/ajwahir/imagine_cup/cfd/haarcascades/haarcascade_frontalface_alt.xml')
 eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
+
 vidcap = cv2.VideoCapture(0)
 # vidcap = cv2.VideoCapture('/home/ajwahir/acads/pd3/face2.mp4')
 vidcap.set(4,1280)
@@ -77,6 +79,7 @@ fs=250.
 fc=30.
 
 gaze=[]
+
 count = 0
 success = True
 while success:
@@ -141,6 +144,7 @@ while success:
 			if(check_distract(gaze)):
 				print "YOU ARE DISTRACTED! GET BACK TO WORK!"
 				gaze = []
+
 
 		p1, st, err = cv2.calcOpticalFlowPyrLK(prev, gray, knp, None, **lk_params)
 
