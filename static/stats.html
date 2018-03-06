@@ -42,6 +42,75 @@
         }
 
     </script>
+    <script>
+        window.onload = function () {
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var dps = []; // dataPoints
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title :{
+                text: "Pulse Plot"
+            },
+            axisY: {
+                includeZero: false
+            },      
+            data: [{
+                type: "line",
+                color: "red",
+                dataPoints: dps
+            }]
+        });
+
+        var det = 1;
+        var xVal = 0;
+        var yVal = 100; 
+        var updateInterval = 1000;
+        var dataLength = 20; // number of dataPoints visible at any point
+
+        var updateChart = function (count) {
+
+            count = count || 1;
+
+            for (var j = 0; j < count; j++) {
+                xmlhttp.open("GET","dps.txt",false);
+                xmlhttp.send();
+                xmlDoc=xmlhttp.responseText;
+                yVal = xmlDoc*1;
+                if(det == 1 && yVal<2000 && yVal >1000){
+                    yVal -= 1000;
+                    dps.push({
+                        x: xVal,
+                        y: yVal
+                    });
+                    det = 2;
+                }   
+                else if(det == 2 && yVal>2000){
+                    yVal -= 2000;
+                    dps.push({
+                        x: xVal,
+                        y: yVal
+                    });
+                    det = 1;
+                }
+                xVal++;
+            }
+
+            if (dps.length > dataLength) {
+                dps.shift();
+            }
+
+            chart.render();
+        };
+
+        updateChart(dataLength);
+        setInterval(function(){updateChart()}, updateInterval);
+
+        }
+    </script>
 
 </head>
 
@@ -83,19 +152,6 @@
             </section> -->
         </nav>
     </div>
-    <section class="jumbo">
-        <div class="row">
-            <div class="large-12 columns">
-                <h1>Welcome to Smart Health and Cognitive Monitor</h1>
-                <!-- <p class="text-center">
-                    <a href="http://epickwebdesign.com" class="medium button">Simple Button</a>
-                </p>
- -->
-            </div>
-        </div>
-    </section>
-
-
 
     <div class="row">
         <div class="large-6 columns">
@@ -114,7 +170,7 @@
         </div>
         <div class="large-6 columns">
             <div>
-                <a href="#" class="button expand" onclick="window.location.href='stats.html'">Stats</a>
+                <a href="#" class="button expand" onclick="window.location.href='index.html'">Home</a>
             </div>
         </div>
     </div>
@@ -123,7 +179,8 @@
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
     <div id="ReloadThis">Default text</div>
-     
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
