@@ -134,7 +134,7 @@ while success:
 			        else:
 			        	gaze.append(0)
 
-		# print len(gaze)
+		# print len(gaze) 
 		if len(gaze)>time_param:
 			for j in range(0,(len(gaze)-time_param)):
 				gaze.pop(0)
