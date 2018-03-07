@@ -10,6 +10,8 @@ All the features are modular and can be activated according to the need
 Its web-based gui and have real time pulse rate monitoring system with real-time plot and can be accessible by the doctors
 for continious monitoring of the emotions and pulse.
 
+Also, and interactive prompts with video suggessions depending on your current mood. 
+
 More modules can be added, depending on the application.
 
 The estimation of non-contact pulse rate has lot of uses. Pulse rate has to be monitored
@@ -23,14 +25,11 @@ using head motion by trying to implement one and integrated them here.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-
+```
 Python 2.7
 openCV
 flask
 azure.storage.blob
-
-```
-Give examples
 ```
 
 ### Installing
@@ -53,26 +52,23 @@ python emotions.py
 which will start your congnitive monitor
 ```
 firefox static/index.html
-
 ```
 and you will have your gui up and running then.
 
-
 ## Running the tests
 
-
-### Realtime pulse display
-
 ### Realtime emotion display 
-
+![alt text](https://image.ibb.co/fhgqiS/happy.png)
+### Realtime pulse display
+![alt text](https://image.ibb.co/gxbCxn/withp.png)
 ### Suggessions of contents depending on your current mood
-
+![alt text](https://image.ibb.co/bFhKcn/happy1.png)
 ### Real-time statistics 
-
+![alt text](https://image.ibb.co/ei2Kcn/rtp.png)
 
 ## Authors
 
 * **Muhammedh Ajwahir** 
-* **Muhammedh Ajwahir** 
-* **Muhammedh Ajwahir** 
+* **Abdul Hafeez** 
+* **Hamdan N Ridwan** 
 
