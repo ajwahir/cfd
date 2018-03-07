@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+Your Pulse Rate is nan
+=======
+Your Pulse Rate is 63.36
+>>>>>>> 05f0107a4694a4631fda2f6fa83baf154a097de1

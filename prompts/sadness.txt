@@ -1,0 +1,5 @@
+sadness 1
+sadness 2
+sadness 4
+sadness 3
+sadness 5

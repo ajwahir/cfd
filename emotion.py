@@ -11,7 +11,7 @@ import os
 import cognitive_face as CF
 import requests
 import random
-
+from shutil import copyfile
 
 @app.route('/emotion')
 def emotion():
@@ -40,8 +40,17 @@ def emotion():
             response = requests.post(face_api_url, params=params, headers=headers, json={"url": k})
             faces = response.json()
             tout = max(faces[0]["faceAttributes"]["emotion"],key=faces[0]["faceAttributes"]["emotion"].get)
-            with open("emotion.php", "w") as text_file:
+            with open("emotion.txt", "w") as text_file:
                 text_file.write("%s" % tout)
+            if tout in ["happiness","sadness","anger","neutral","surprise","contempt","disgust","fear"]:
+                with open("prompts/"+tout+".txt","r") as f:
+                    lines = f.readlines()
+                with open("static/prompt.txt", "w") as text_file:
+                    text_file.write("%s" % random.choice(lines))
+            if tout in ["happiness","sadness","anger","surprise"]:
+                copyfile("emojis/"+tout+".gif", "static/mood.gif")
+
+
         except Exception as e:
             pass
 if __name__ == '__main__':
