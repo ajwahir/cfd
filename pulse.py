@@ -8,6 +8,7 @@ from scipy.signal import butter, lfilter, freqz
 from scipy.signal import find_peaks_cwt
 from scipy.interpolate import interp1d
 from collections import deque
+import math
 
 
 def getavg(indexes,tr):
@@ -58,8 +59,9 @@ def check_distract(gaze):
 	else:
 		return False
 
-time_param = 100
+time_param = 10
 per_for_dis = 0.9;
+flagd=1
 
 face_cascade = cv2.CascadeClassifier('/home/ajwahir/imagine_cup/cfd/haarcascades/haarcascade_frontalface_alt.xml')
 eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
@@ -143,7 +145,14 @@ while success:
 				gaze.pop(0)
 			if(check_distract(gaze)):
 				print "YOU ARE DISTRACTED! GET BACK TO WORK!"
+				f=open('static/distract_notif.txt','w')
+				f.write('1')
+				f.close()
 				gaze = []
+			else:
+				f=open('static/distract_notif.txt','w')
+				f.write('0')
+				f.close()
 
 
 		p1, st, err = cv2.calcOpticalFlowPyrLK(prev, gray, knp, None, **lk_params)
@@ -203,9 +212,36 @@ while success:
 			finp=fin/fs
 			finp=finp*120
 
-			print finp
+			# print finp
+			vis = finp
+
 
 			f=open('static/heartrate.txt','w')
 			f.write('Your Pulse Rate is '+ str(round(finp,2)))
 			f.close()
+			# print str(finp)
+			f=open('static/dps.txt','w')
+
+			if(math.isnan(vis)!=True):
+				print finp
+				if flagd==1 :
+					vis=round(vis,2)
+					vis = vis+1000.
+					f.write(str(vis))
+					f.close()
+					flagd=0
+				else:
+					vis=round(vis,2);
+					vis=vis+2000
+					f.write(str(vis))
+					f.close()
+					flagd=1
+
+
+					
+	    #             flagd=0
+	           
+
+
+
 		

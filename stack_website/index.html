@@ -35,7 +35,7 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', 'loadtxt.txt' + '?' + new Date().getTime(), true);
+                $http.open('GET', 'heartrate.txt' + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
@@ -43,6 +43,9 @@
 
     </script> -->
 
+
+
+    
 </head>
 
 <body>
@@ -95,7 +98,7 @@
         </div>
     </section>
 
-
+<section>
 
     <div class="row">
         <div class="large-6 columns">
@@ -118,6 +121,31 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+</section>
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_text();}, 1000);
+    </script>
+
+  <!--  <script>
+        // setTimeout(function() {updateImage();}, 1000);
+        updateImage();
+    </script>
+   <div id="theText">Default text</div> -->
+   <section>
+   <div class="row">
+       <div class="large-10 columns">
+           <h1>
+                Current Mood 
+            </h1>
+        </div>
+    </div>
+   <div class="row">
+        <div class="large-6 columns">
+           <img src="happy.gif" id="img">
+
+            
+=======
 
 <!--     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
@@ -125,8 +153,41 @@
     <div id="ReloadThis">Default text</div>
  -->
    
+>>>>>>> 0e8e71df6ffc2e3a116dbfb659a296fa6c06eb67
 
+            <script>
+                window.onload = function() {
+                    var image = document.getElementById("img");
 
+                    function updateImage() {
+                        image.src = image.src.split("?")[0] + "?" + new Date().getTime();
+                    }
+
+                    setInterval(updateImage, 1000);
+                }
+            </script>
+        </div>
+        <div class="large-6 columns">
+                <h1>
+                <div id="ReloadThis">
+                    
+                
+                </div>
+                </h1>
+            
+        </div>
+    </div>
+</section>
+    <div class="row">
+        <h3>
+            Test message :hellooooooooooooooooooooooooooooooooooooooo
+        </h3>
+    </div>
+    <div class="row">
+        <h3>
+            Test message :hellooooooooooooooooooooooooooooooooooooooo
+        </h3>
+    </div>
 
     <!-- <footer>
         <div id="contact">
