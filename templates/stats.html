@@ -1,0 +1,279 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Stack Poppers || IIT Madras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'foundation-icons/foundation-icons.css') }}" />
+    <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+    <script type="text/javascript"> 
+
+        function Ajax_text()
+        {
+            var
+                $http,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('ReloadThis').innerHTML = $http.responseText;
+                        setTimeout(function(){$self();}, 1000);
+                    }
+                };
+                $http.open('GET', 'loadtxt.txt' + '?' + new Date().getTime(), true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+    <!-- Emotion Analyzer -->
+    <script>
+        function EmotionAnalyzer() {
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","hps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        hpsVal = xmlDoc*1;
+        xmlhttp.open("GET","nps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        npsVal = xmlDoc*1;
+        xmlhttp.open("GET","sups.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        supsVal = xmlDoc*1;
+        xmlhttp.open("GET","sps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        spsVal = xmlDoc*1;
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title:{
+                text: "Emotion Analyzer"
+            },
+            axisX: {
+                title: "Emotions"
+            },
+            axisY: {
+                title: "Units",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "Emotions",
+                showInLegend: true,      
+                yValueFormatString: "#,##0.# Units",
+                dataPoints: [
+                    { label: "Happiness", y: hpsVal },
+                    { label: "Neutral", y: npsVal },
+                    { label: "Surprise", y: supsVal },
+                    { label: "Sadness", y: spsVal }
+                ]
+            }]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        }
+    </script>
+    <!-- Pulse Analyzer -->
+    <script>
+        function PulseAnalyzer() {
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var dps = []; // dataPoints
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title :{
+                text: "Pulse Analyzer"
+            },
+            axisY: {
+                includeZero: true
+            },      
+            data: [{
+                type: "line",
+                color: "red",
+                dataPoints: dps
+            }]
+        });
+
+        var det = 1;
+        var xVal = 0;
+        var yVal = 100; 
+        var updateInterval = 1000;
+        var dataLength = 10; // number of dataPoints visible at any point
+
+        var updateChart = function (count) {
+
+            count = count || 1;
+
+            for (var j = 0; j < count; j++) {
+                xmlhttp.open("GET","dps.txt",false);
+                xmlhttp.send();
+                xmlDoc=xmlhttp.responseText;
+                yVal = xmlDoc*1;
+                if(det == 1 && yVal<2000 && yVal >1000){
+                    yVal -= 1000;
+                    dps.push({
+                        x: xVal,
+                        y: yVal
+                    });
+                    det = 2;
+                }   
+                else if(det == 2 && yVal>2000){
+                    yVal -= 2000;
+                    dps.push({
+                        x: xVal,
+                        y: yVal
+                    });
+                    det = 1;
+                }
+                xVal++;
+            }
+
+            if (dps.length > dataLength) {
+                dps.shift();
+            }
+
+            chart.render();
+        };
+
+        updateChart(dataLength);
+        setInterval(function(){updateChart()}, updateInterval);
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="top"></div>
+    <div class="contain-to-grid sticky">
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1>
+                        <a href="#">Team Stack Poppers</a>
+                    </h1>
+                </li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+              <!--   <li class="toggle-topbar menu-icon">
+                    <a href="#">
+                        <span>Menu</span>
+                    </a>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+
+                <ul id="nav" class="right">
+                    <li>
+                        <a href="#top">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact Us</a>
+                    </li>
+                </ul>
+
+            </section> -->
+        </nav>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="large-6 columns">
+                <a href="#" class="button expand" onclick="EmotionAnalyzer()">Emotion Analyzer</a>
+            </div>
+            <div class="large-6 columns">
+                <div>
+                    <a href="#" class="button expand" onclick="PulseAnalyzer()">Pulse Analyzer</a>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <a href="#" class="button expand">Anti - Distraction</a>
+            </div>
+            <div class="large-6 columns">
+                <div>
+                    <a href="#" class="button expand" onclick="window.location.href='index.html'">Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_text();}, 1000);
+    </script>
+    <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+    <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+    <script>
+        $(function() {
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
