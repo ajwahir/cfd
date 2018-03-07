@@ -39,17 +39,53 @@ def emotion():
             print k
             response = requests.post(face_api_url, params=params, headers=headers, json={"url": k})
             faces = response.json()
-            tout = max(faces[0]["faceAttributes"]["emotion"],key=faces[0]["faceAttributes"]["emotion"].get)
+            f = faces[0]["faceAttributes"]["emotion"]
+            tout = max(f,key=f.get)
             with open("emotion.txt", "w") as text_file:
                 text_file.write("%s" % tout)
             if tout in ["happiness","sadness","anger","neutral","surprise","contempt","disgust","fear"]:
-                with open("prompts/"+tout+".txt","r") as f:
-                    lines = f.readlines()
+                with open("prompts/"+tout+".txt","r") as f1:
+                    lines = f1.readlines()
                 with open("static/prompt.txt", "w") as text_file:
                     text_file.write("%s" % random.choice(lines))
             if tout in ["happiness","sadness","anger","surprise"]:
                 copyfile("emojis/"+tout+".gif", "static/mood.gif")
+            print f
 
+
+
+            with open('static/hps.txt','w') as fil:
+                a= f["happiness"]
+                print a
+                fil.write(str(a))
+                # fil.close()
+
+            fil=open('static/nps.txt','w')
+            a= f["neutral"]
+            print a
+            fil.write(str(a))
+            fil.close()
+
+            fil=open('static/sups.txt','w')
+            a= f["surprise"]
+            print a
+            fil.write(str(a))
+            fil.close()    
+                    
+            fil=open('static/sps.txt','w')
+            a= f["sadness"]
+            print a
+            fil.write(str(a))
+            fil.close()            
+            # f=open('static/sups.txt','w')
+            # a= f["surprise"]
+            # f.write(a)
+            # f.close()
+
+            # f=open('static/sps.txt','w')
+            # a= f["sadness"]
+            # f.write(a)
+            # f.close()
 
         except Exception as e:
             pass
