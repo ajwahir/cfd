@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Stack Poppers || IIT Madras</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'foundation-icons/foundation-icons.css') }}" />
-    <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="foundation-icons/foundation-icons.css" />
+    <script src="js/vendor/modernizr.js"></script>
     <script type="text/javascript"> 
 
         function Ajax_text()
@@ -35,7 +35,7 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', "{{ url_for('static', filename = 'heartrate.txt') }}" + '?' + new Date().getTime(), true);
+                $http.open('GET', "heartrate.txt" + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
@@ -69,7 +69,7 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', "{{ url_for('static', filename = 'prompt.txt') }}" + '?' + new Date().getTime(), true);
+                $http.open('GET', "prompt.txt" + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
@@ -103,11 +103,46 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', "{{ url_for('static', filename = 'doc.txt') }}" + '?' + new Date().getTime(), true);
+                $http.open('GET', "doc.txt" + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
         }
+
+        function notifyMe() {
+
+        if (window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+       }
+       else{
+           xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+       }
+        xmlhttp.open("GET","distract_notif.txt",false);
+               xmlhttp.send();
+               xmlDoc=xmlhttp.responseText; 
+
+        // document.write(xmlDoc.length);
+       
+      if(xmlDoc==1){  
+
+      if (Notification.permission !== "granted")
+        Notification.requestPermission();
+      else {
+        var notification = new Notification('Hey!', {
+          icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+          body: "YOU SEEM TO BE DISTRACTED, GET BACK TO WORK!",
+        });
+
+        notification.onclick = function () {
+          window.open("index.html");    
+
+      }
+      
+    }}
+    
+
+
+}
 
     </script>
 
@@ -126,7 +161,7 @@
   
         </nav>
     </div>
-    <section class="jumbo">
+    <section class="jumbo" style="height: 300px;">
         <div class="row">
             <div class="large-12 columns">
                 <h1>Smart Health and Cognitive Monitor</h1>
@@ -158,13 +193,17 @@
         </div>
         <div class="large-6 columns">
             <div>
-                <a href="/home/ajwahir/imagine_cup/cfd/static/stats.html" class="button expand">Stats</a>
+                <a href="stats.html" class="button expand">Stats</a>
             </div>
         </div>
     </div>
-
-    
-    </section>
+    <div class="row">
+       <div class="large-12 columns">
+           <h1>
+                <a href="" class="button expand" onclick="mood();">CURRENT MOOD</a>
+            </h1>
+        </div>
+    </div>
 
    <!--  <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
@@ -174,32 +213,74 @@
     </script>
     <script type="text/javascript">
         setTimeout(function() {Ajax_doc();}, 1000);
+        setInterval(function(){notifyMe()}, 1000);
+
     </script>
 
 
-<section>
-    <div class="row">
+    <!-- <div class="row">
        <div class="large-10 columns">
            <h1>
-                Current Mood 
+                <a href="   " class="button expand" onclick="mood()">CURRENT MOOD</a>
             </h1>
         </div>
-    </div>
+    </div> -->
    <div class="row">
         <div class="large-6 columns">
-           <img src="{{ url_for('static', filename = 'mood.gif') }}" id="img">
+           <img src="mood.gif" id="img">
 
             
 
             <script>
-                window.onload = function() {
+               function mood()  {
                     var image = document.getElementById("img");
-                    function updateImage() {
-                        image.src = image.src.split("?")[0] + "?" + new Date().getTime();
-                    }
-                    setInterval(updateImage, 1000);
+                    // function updateImage() {
+
+                         // preventDefault();
+                        //  if (window.XMLHttpRequest){
+                        //     xmlhttp=new XMLHttpRequest();
+                        // }
+                        // else{
+                        //     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        // }
+                        // xmlhttp.open("GET","happiness.txt",false);
+                        // xmlhttp.send();
+                        // xmlDoc=xmlhttp.responseText;
+                        // hpsVal = xmlDoc*1;
+                        // xmlhttp.open("GET","neutral.txt",false);
+                        // xmlhttp.send();
+                        // xmlDoc=xmlhttp.responseText;
+                        // npsVal = xmlDoc*1;
+                        // xmlhttp.open("GET","surprise.txt",false);
+                        // xmlhttp.send();
+                        // xmlDoc=xmlhttp.responseText;
+                        // supsVal = xmlDoc*1;
+                        // xmlhttp.open("GET","sadness.txt",false);
+                        // xmlhttp.send();
+                        // xmlDoc=xmlhttp.responseText;
+                        // spsVal = xmlDoc*1;
+
+
+                        // if(hpsVal==Math.max(hpsVal,spsVal,npsVal,supsVal))
+                        //     image.setAttribute('src',"https://i.imgur.com/6SfWGAR.gif")
+                        // else if((npsVal==Math.max(hpsVal,spsVal,npsVal,supsVal)))
+                        //     image.setAttribute('src',"https://i.imgur.com/oApzp2x.gif")
+                        // else if((spsVal==Math.max(hpsVal,spsVal,npsVal,supsVal)))
+                        //     image.setAttribute('src',"../emojis/sadness.gif")
+                        // else if((supsVal==Math.max(hpsVal,spsVal,npsVal,supsVal)))
+                        //     image.setAttribute('src',"../emojis/surprise.gif")
+
+                        // // image.src = image.src.split("?")[0] + "?" + new Date().getTime();
+
+                        image.setAttribute('src', "mood.gif" );
+                    // }
+                    // setInterval(updateImage, 3000);
+                    return false;
                 }
             </script>
+            <script type="text/javascript">
+        setTimeout(function() {updateImage();}, 1000);
+    </script>
         </div>
         <div class="large-6 columns">
                 <h1>
@@ -217,7 +298,7 @@
     <div class="row">
        <div class="large-10 columns">
            <h1>
-                Check ths out! 
+                Check this out! 
             </h1>
         </div>
     </div>
@@ -237,7 +318,7 @@
                         else{
                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                         }
-                        xmlhttp.open("GET","{{ url_for('static', filename = 'vid.txt') }}",false);
+                        xmlhttp.open("GET","vid.txt",false);
                         xmlhttp.send();
                         xmlDoc=xmlhttp.responseText; 
                         var urlString = String(xmlDoc);
@@ -276,8 +357,8 @@
     </div>
 
  
-    <script src="{{ url_for('static', filename = 'js/vendor/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
     <script>
         $(document).foundation();
     </script>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Stack Poppers || IIT Madras</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'foundation-icons/foundation-icons.css') }}" />
-    <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+       <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="foundation-icons/foundation-icons.css" />
+    <script src="js/vendor/modernizr.js"></script>
     <script type="text/javascript"> 
 
         function Ajax_text()
@@ -51,19 +51,19 @@
         else{
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.open("GET","{{ url_for('static', filename = 'happniess.txt') }}",false);
+        xmlhttp.open("GET","happiness.txt",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         hpsVal = xmlDoc*1;
-        xmlhttp.open("GET","{{ url_for('static', filename = 'neutral.txt') }}",false);
+        xmlhttp.open("GET","neutral.txt",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         npsVal = xmlDoc*1;
-        xmlhttp.open("GET","{{ url_for('static', filename = 'surprise.txt') }}",false);
+        xmlhttp.open("GET","surprise.txt",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         supsVal = xmlDoc*1;
-        xmlhttp.open("GET","{{ url_for('static', filename = 'sadness.txt') }}",false);
+        xmlhttp.open("GET","sadness.txt",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         spsVal = xmlDoc*1;
@@ -143,7 +143,7 @@
         var det = 1;
         var xVal = 0;
         var yVal = 100; 
-        var updateInterval = 1000;
+        var updateInterval = 10;
         var dataLength = 10; // number of dataPoints visible at any point
 
         var updateChart = function (count) {
@@ -151,7 +151,7 @@
             count = count || 1;
 
             for (var j = 0; j < count; j++) {
-                xmlhttp.open("GET","{{ url_for('static', filename = 'dps.txt') }}",false);
+                xmlhttp.open("GET","dps.txt",false);
                 xmlhttp.send();
                 xmlDoc=xmlhttp.responseText;
                 yVal = xmlDoc*1;
@@ -242,7 +242,7 @@
             </div>
             <div class="large-6 columns">
                 <div>
-                    <a href="http://localhost:5000" class="button expand">Home</a>
+                    <a href="local.html" class="button expand">Home</a>
                 </div>
             </div>
         </div>

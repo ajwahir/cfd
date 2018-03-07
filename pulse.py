@@ -59,7 +59,7 @@ def check_distract(gaze):
 	else:
 		return False
 
-time_param = 1000
+time_param = 25
 per_for_dis = 0.9
 flagd=1
 
