@@ -43,6 +43,53 @@
 
     </script>
 
+   <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.'); 
+        return;
+      }
+
+      if (Notification.permission !== "granted")
+        Notification.requestPermission();
+    });
+
+    function notifyMe() {
+
+        if (window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+       }
+       else{
+           xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+       }
+        xmlhttp.open("GET","distract_notif.txt",false);
+               xmlhttp.send();
+               xmlDoc=xmlhttp.responseText; 
+
+        // document.write(xmlDoc.length);
+       
+      if(xmlDoc==1){  
+
+      if (Notification.permission !== "granted")
+        Notification.requestPermission();
+      else {
+        var notification = new Notification('Hey!', {
+          icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+          body: "YOU SEEM TO BE DISTRACTED, GET BACK TO WORK!",
+        });
+
+        notification.onclick = function () {
+          window.open("index.html");    
+
+      }
+      
+    }}
+    
+
+
+}
+   </script> 
+
 </head>
 
 <body>
@@ -121,6 +168,8 @@
 
     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
+        // setTimeout(function() {notifyMe();}, 1000);
+        setInterval(function(){notifyMe()}, 1000);
     </script>
     <div id="ReloadThis">Default text</div>
      
