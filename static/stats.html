@@ -51,19 +51,19 @@
         else{
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.open("GET","hps.txt",false);
+        xmlhttp.open("GET","{{ url_for('static', filename = 'happniess.txt') }}",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         hpsVal = xmlDoc*1;
-        xmlhttp.open("GET","nps.txt",false);
+        xmlhttp.open("GET","{{ url_for('static', filename = 'neutral.txt') }}",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         npsVal = xmlDoc*1;
-        xmlhttp.open("GET","sups.txt",false);
+        xmlhttp.open("GET","{{ url_for('static', filename = 'surprise.txt') }}",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         supsVal = xmlDoc*1;
-        xmlhttp.open("GET","sps.txt",false);
+        xmlhttp.open("GET","{{ url_for('static', filename = 'sadness.txt') }}",false);
         xmlhttp.send();
         xmlDoc=xmlhttp.responseText;
         spsVal = xmlDoc*1;
@@ -151,7 +151,7 @@
             count = count || 1;
 
             for (var j = 0; j < count; j++) {
-                xmlhttp.open("GET","dps.txt",false);
+                xmlhttp.open("GET","{{ url_for('static', filename = 'dps.txt') }}",false);
                 xmlhttp.send();
                 xmlDoc=xmlhttp.responseText;
                 yVal = xmlDoc*1;

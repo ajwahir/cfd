@@ -59,8 +59,8 @@ def check_distract(gaze):
 	else:
 		return False
 
-time_param = 10
-per_for_dis = 0.9;
+time_param = 1000
+per_for_dis = 0.9
 flagd=1
 
 face_cascade = cv2.CascadeClassifier('/home/ajwahir/imagine_cup/cfd/haarcascades/haarcascade_frontalface_alt.xml')
