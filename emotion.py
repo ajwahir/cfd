@@ -48,35 +48,39 @@ def emotion():
                     lines = f1.readlines()
                 with open("static/prompt.txt", "w") as text_file:
                     text_file.write("%s" % random.choice(lines))
+                with open("prompts/"+tout+"_vid.txt","r") as f1:
+                    lines = f1.readlines()
+                with open("static/vid.txt", "w") as text_file:
+                    text_file.write("%s" % random.choice(lines))                    
             if tout in ["happiness","sadness","anger","surprise"]:
                 copyfile("emojis/"+tout+".gif", "static/mood.gif")
             print f
 
 
-
-            with open('static/hps.txt','w') as fil:
-                a= f["happiness"]
-                print a
-                fil.write(str(a))
+            for each in ["happiness","sadness","neutral","surprise"]:
+                with open('static/'+each+'.txt','w') as fil:
+                    a= f[each]
+                    print a
+                    fil.write(str(a))
                 # fil.close()
 
-            fil=open('static/nps.txt','w')
-            a= f["neutral"]
-            print a
-            fil.write(str(a))
-            fil.close()
+            # fil=open('static/nps.txt','w')
+            # a= f["neutral"]
+            # print a
+            # fil.write(str(a))
+            # fil.close()
 
-            fil=open('static/sups.txt','w')
-            a= f["surprise"]
-            print a
-            fil.write(str(a))
-            fil.close()    
+            # fil=open('static/sups.txt','w')
+            # a= f["surprise"]
+            # print a
+            # fil.write(str(a))
+            # fil.close()    
                     
-            fil=open('static/sps.txt','w')
-            a= f["sadness"]
-            print a
-            fil.write(str(a))
-            fil.close()            
+            # fil=open('static/sps.txt','w')
+            # a= f["sadness"]
+            # print a
+            # fil.write(str(a))
+            # fil.close()            
             # f=open('static/sups.txt','w')
             # a= f["surprise"]
             # f.write(a)

@@ -1,5 +1,2 @@
-surprise 1
-surprise 2
-surprise 4
-surprise 3
-surprise 5
+What are you surprised about?
+Wanna share your surprise with your friends? 
