@@ -52,7 +52,7 @@ def emotion():
                     lines = f1.readlines()
                 with open("static/vid.txt", "w") as text_file:
                     text_file.write("%s" % random.choice(lines))                    
-            if tout in ["happiness","sadness","anger","surprise"]:
+            if tout in ["happiness","sadness","neutral","surprise"]:
                 copyfile("emojis/"+tout+".gif", "static/mood.gif")
             print f
 
