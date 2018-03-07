@@ -42,8 +42,83 @@
         }
 
     </script>
+    <!-- Emotion Analyzer -->
     <script>
-        window.onload = function () {
+        function EmotionAnalyzer() {
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","hps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        hpsVal = xmlDoc*1;
+        xmlhttp.open("GET","nps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        npsVal = xmlDoc*1;
+        xmlhttp.open("GET","sups.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        supsVal = xmlDoc*1;
+        xmlhttp.open("GET","sps.txt",false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseText;
+        spsVal = xmlDoc*1;
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title:{
+                text: "Emotion Analyzer"
+            },
+            axisX: {
+                title: "Emotions"
+            },
+            axisY: {
+                title: "Units",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "Emotions",
+                showInLegend: true,      
+                yValueFormatString: "#,##0.# Units",
+                dataPoints: [
+                    { label: "Happiness", y: hpsVal },
+                    { label: "Neutral", y: npsVal },
+                    { label: "Surprise", y: supsVal },
+                    { label: "Sadness", y: spsVal }
+                ]
+            }]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        }
+    </script>
+    <!-- Pulse Analyzer -->
+    <script>
+        function PulseAnalyzer() {
         if (window.XMLHttpRequest){
             xmlhttp=new XMLHttpRequest();
         }
@@ -53,10 +128,10 @@
         var dps = []; // dataPoints
         var chart = new CanvasJS.Chart("chartContainer", {
             title :{
-                text: "Pulse Plot"
+                text: "Pulse Analyzer"
             },
             axisY: {
-                includeZero: false
+                includeZero: true
             },      
             data: [{
                 type: "line",
@@ -69,7 +144,7 @@
         var xVal = 0;
         var yVal = 100; 
         var updateInterval = 1000;
-        var dataLength = 20; // number of dataPoints visible at any point
+        var dataLength = 10; // number of dataPoints visible at any point
 
         var updateChart = function (count) {
 
@@ -152,34 +227,31 @@
             </section> -->
         </nav>
     </div>
-
     <div class="row">
-        <div class="large-6 columns">
-            <a href="http://localhost:8001/emotion" class="button expand">Emotion Analyser</a>
-        </div>
-        <div class="large-6 columns">
-            <div>
-                <a href="#" class="button expand">Pulse Monitor</a>
+        <div class="row">
+            <div class="large-6 columns">
+                <a href="#" class="button expand" onclick="EmotionAnalyzer()">Emotion Analyzer</a>
+            </div>
+            <div class="large-6 columns">
+                <div>
+                    <a href="#" class="button expand" onclick="PulseAnalyzer()">Pulse Analyzer</a>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <a href="#" class="button expand">Anti - Distraction</a>
+            </div>
+            <div class="large-6 columns">
+                <div>
+                    <a href="#" class="button expand" onclick="window.location.href='index.html'">Home</a>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="large-6 columns">
-            <a href="#" class="button expand">Anti - Distraction</a>
-        </div>
-        <div class="large-6 columns">
-            <div>
-                <a href="#" class="button expand" onclick="window.location.href='index.html'">Home</a>
-            </div>
-        </div>
-    </div>
-
     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
-    <div id="ReloadThis">Default text</div>
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+    <div id="chartContainer" style="height: 450px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>

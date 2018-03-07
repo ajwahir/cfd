@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Stack Poppers || IIT Madras</title>
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\css\foundation.css" />
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\css\custom.css" />
-    <link rel="stylesheet" href="C:\Users\hamda\Desktop\cfd\cfd\stack_website\foundation-icons\foundation-icons.css" />
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\vendor\modernizr.js"></script>
-<!--     <script type="text/javascript"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/foundation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'foundation-icons/foundation-icons.css') }}" />
+    <script src="{{ url_for('static', filename = 'js/vendor/modernizr.js') }}"></script>
+    <script type="text/javascript"> 
 
         function Ajax_text()
         {
@@ -35,17 +35,82 @@
                         setTimeout(function(){$self();}, 1000);
                     }
                 };
-                $http.open('GET', 'heartrate.txt' + '?' + new Date().getTime(), true);
+                $http.open('GET', "{{ url_for('static', filename = 'heartrate.txt') }}" + '?' + new Date().getTime(), true);
                 $http.send(null);
             }
 
         }
 
-    </script> -->
+    </script>
 
+    <script type="text/javascript"> 
 
+        function Ajax_emotion()
+        {
+            var
+                $http,
+                $self = arguments.callee;
 
-    
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('prompt').innerHTML = $http.responseText;
+                        setTimeout(function(){$self();}, 1000);
+                    }
+                };
+                $http.open('GET', "{{ url_for('static', filename = 'prompt.txt') }}" + '?' + new Date().getTime(), true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+
+    <script type="text/javascript"> 
+
+        function Ajax_doc()
+        {
+            var
+                $http,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('doc').innerHTML = $http.responseText;
+                        setTimeout(function(){$self();}, 1000);
+                    }
+                };
+                $http.open('GET', "{{ url_for('static', filename = 'doc.txt') }}" + '?' + new Date().getTime(), true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -121,19 +186,19 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</section>
+    </section>
+
     <script type="text/javascript">
         setTimeout(function() {Ajax_text();}, 1000);
     </script>
-
-  <!--  <script>
-        // setTimeout(function() {updateImage();}, 1000);
-        updateImage();
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_emotion();}, 1000);
     </script>
-   <div id="theText">Default text</div> -->
-   <section>
-   <div class="row">
+    <script type="text/javascript">
+        setTimeout(function() {Ajax_doc();}, 1000);
+    </script>
+<section>
+    <div class="row">
        <div class="large-10 columns">
            <h1>
                 Current Mood 
@@ -142,18 +207,9 @@
     </div>
    <div class="row">
         <div class="large-6 columns">
-           <img src="happy.gif" id="img">
+           <img src="{{ url_for('static', filename = 'mood.gif') }}" id="img">
 
             
-=======
-
-<!--     <script type="text/javascript">
-        setTimeout(function() {Ajax_text();}, 1000);
-    </script>
-    <div id="ReloadThis">Default text</div>
- -->
-   
->>>>>>> 0e8e71df6ffc2e3a116dbfb659a296fa6c06eb67
 
             <script>
                 window.onload = function() {
@@ -178,16 +234,20 @@
         </div>
     </div>
 </section>
-    <div class="row">
+   
+<div class="row">
         <h3>
-            Test message :hellooooooooooooooooooooooooooooooooooooooo
+            <div id="prompt">
+            </div>
         </h3>
     </div>
     <div class="row">
         <h3>
-            Test message :hellooooooooooooooooooooooooooooooooooooooo
+            <div id="doc">
+            </div>
         </h3>
     </div>
+
 
     <!-- <footer>
         <div id="contact">
@@ -252,8 +312,8 @@
         </div>
     </footer> -->
  
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\vendor\jquery.js"></script>
-    <script src="C:\Users\hamda\Desktop\cfd\cfd\stack_website\js\foundation.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/vendor/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/foundation.min.js') }}"></script>
     <script>
         $(document).foundation();
     </script>
