@@ -2,23 +2,22 @@
 ## This project is for code.fun.do ShowCase 2018
 
 This is a platform for Smart Health and Cognition Monitoring.
-When, a person is front of the computer and webcam is not in use, we use computer vision techniques to monioter a person's mood,
-pulse rate and track his/her eye-gaze to check if he/she is distrcted.
+When a person is in front of a computer and the webcam is not in use, we use computer vision techniques to monitor the person's mood,
+pulse rate and track his/her gaze direction to check if he/she is distracted.
 
 All the features are modular and can be activated according to the need.
 
-It's a  web-based gui and have real time pulse rate monitoring system with real-time plot and can be accessed by the doctors
-for continious monitoring of the emotions and pulse.
+A web-based GUI displays pulse rate and emotion in realtime. These data can also be saved, viewed continuously or sent to a doctor for diagnosis.
 
-Also, an interactive prompts with video suggessions depending on your current mood is displayed. 
+Also, interactive prompts with content(videos, thoughts etc)  suggessions depending on the current mood is displayed. 
 
-More modules can be added, depending on the application.
+More modules can be added depending on the application.
 
 The estimation of non-contact pulse rate has lot of uses. Pulse rate has to be monitored
 frequently all the time to understand any symptom at an early stage. People don’t like
 wearing something all the time. So, there is a need for some non-contact device that
 could monitor the pulse all the time. So, we tried to make a device that detects pulse rate
-using head motion by trying to implement one and integrated them here.
+using head motion by trying to implement one and integrated them here [1] .
 
 ## Getting Started
 
@@ -74,7 +73,7 @@ and you will have your gui up and running then.
 
 ## Reference 
 
-Balakrishnan, G., Durand, F., and Guttag, J. (2013). Detecting pulse from head motions in
+[1] Balakrishnan, G., Durand, F., and Guttag, J. (2013). Detecting pulse from head motions in
 video.  In
 Proceedings of the 2013 IEEE Conference on Computer Vision and Pattern
 Recognition
