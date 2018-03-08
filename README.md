@@ -2,15 +2,15 @@
 ## This project is for code.fun.do ShowCase 2018
 
 This is a platform for Smart Health and Cognition Monitoring.
-When, a person is front of the computer and webcam is not in use, we us computer vision techniques monioter a person's mood,
-pulse rate and track his/her eye-gaze to check if he is distrcted.
+When, a person is front of the computer and webcam is not in use, we use computer vision techniques to monioter a person's mood,
+pulse rate and track his/her eye-gaze to check if he/she is distrcted.
 
-All the features are modular and can be activated according to the need
+All the features are modular and can be activated according to the need.
 
-Its web-based gui and have real time pulse rate monitoring system with real-time plot and can be accessible by the doctors
+It's a  web-based gui and have real time pulse rate monitoring system with real-time plot and can be accessed by the doctors
 for continious monitoring of the emotions and pulse.
 
-Also, and interactive prompts with video suggessions depending on your current mood. 
+Also, an interactive prompts with video suggessions depending on your current mood is displayed. 
 
 More modules can be added, depending on the application.
 
@@ -72,3 +72,11 @@ and you will have your gui up and running then.
 * **Abdul Hafeez** 
 * **Hamdan N Ridwan** 
 
+## Reference 
+
+Balakrishnan, G., Durand, F., and Guttag, J. (2013). Detecting pulse from head motions in
+video.  In
+Proceedings of the 2013 IEEE Conference on Computer Vision and Pattern
+Recognition
+, CVPR ’13, pages 3430–3437, Washington, DC, USA. IEEE Computer
+Society.
