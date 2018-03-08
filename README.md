@@ -1,7 +1,7 @@
 # cfd
 ## This project is for code.fun.do ShowCase 2018
 
-This is a platform for Smart Cognitive and Health Monitoring.
+This is a platform for Smart Health and Cognition Monitoring.
 When, a person is front of the computer and webcam is not in use, we us computer vision techniques monioter a person's mood,
 pulse rate and track his/her eye-gaze to check if he is distrcted.
 
